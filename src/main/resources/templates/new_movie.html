@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Panel de Administración - Películas</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h1>Nueva Película</h1><br />
+		<form action="/insert_movie" method="post">
+			<label for="nombre">Nombre</label>
+			<input type="text" name="movie_name" id="movie_name"/><br />
+			
+			<label for="tema">URL de la película</label>
+			<input type="text" name="url_movie" id="url_movie"/><br />
+			
+			<input type="submit" value="Crear nueva película" /><br />
+		</form>
+	</body>
+</html>

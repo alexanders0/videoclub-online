@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Panel de Administración - Usuarios</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h1>Ver Película</h1><br />
+		<h2 th:text="${movie.getName()}">Nombre Película</h2><br />
+		<p th:text="${movie.getDescription()}">descripcion</p>
+		<p th:text="${movie.getYear()}">año</p>
+		<p th:text="${movie.getDirector()}">director</p>
+		<p th:text="${movie.getActors()}">actores</p>
+		<p th:text="${movie.getUrlCoverFilm()}">Portada</p>
+		<p th:text="${movie.getRating()}">Valoración</p>
+	    <iframe width="560" height="315" th:src="${movie.getUrlMovie()}">
+	    </iframe>
+	</body>
+</html>

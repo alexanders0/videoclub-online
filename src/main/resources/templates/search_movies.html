@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Panel de Administración - Usuarios</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h1>Buscar Películas</h1><br />
+		<form th:action="@{/search_result}" method="post">
+			<label>Nombre de película:</label><input type="text" name="movie_name" /><br />
+			<input type="submit" value="Search" /><br />
+		</form>
+	</body>
+</html>
