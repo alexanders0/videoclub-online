@@ -1,62 +1,64 @@
 package videoclub_online.videoclub_online;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 public class User {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	private String nombre;
-	private String contrasena;
-	private String correo;
-	
-	public User(){
-	}
-	
-	public User(String nombre, String contrasena, String correo) {
-		this.nombre = nombre;
-		this.contrasena = contrasena;
-		this.correo = correo;
-	}
-	
-	//	Getters and Setters
+    private Long id;
 
-	public long getId() {
-		return id;
-	}
+    private String user;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    private String password;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<GrantedAuthority> roles;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public User() {
+    }
 
-	public String getContrasena() {
-		return contrasena;
-	}
+    public User(String user, String password, List<GrantedAuthority> roles) {
+        this.user = user;
+        this.password = new BCryptPasswordEncoder().encode(password);
+        this.roles = roles;
+    }
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
+    // getters, setters
 
-	public String getCorreo() {
-		return correo;
-	}
+    public String getUser() {
+        return user;
+    }
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-	
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPasswordHash() {
+        return password;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.password = passwordHash;
+    }
+
+    public List<GrantedAuthority> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<GrantedAuthority> roles) {
+        this.roles = roles;
+    }
+
 }
