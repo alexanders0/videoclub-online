@@ -3,6 +3,9 @@
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <title>Home</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
 </head>
 <body>
     <h1>
@@ -10,11 +13,36 @@
     </h1>
 
     <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <a th:href="@{/root}">Administration page</a>
+        <a th:href="@{/root}">Manage users</a>
+        <a th:href="@{/new_movie}">Create movie</a>
     </div>
 
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out" />
     </form>
+
+	<form class="navbar-form navbar-left" role="search" th:action="@{/search_result}" method="get">
+	  <div class="form-group">
+	    <input type="text" class="form-control" name="movie_name" placeholder="Search"/>
+	  </div>
+	  <button type="submit" class="btn btn-default">Submit</button>
+	</form>
+    
+    <br/>
+    
+    <a href="@{/watch_movie}" th:href="@{/watch_movie(id=${it.index+1})}" th:each="movie, it : ${movies}" th:text="|${movie.name}|">Película</a> 
+	
+	<a th:href="@{/watch_movie(id=${it.index+1})}" th:each="movie, it : ${movies}">
+	<button type="button" class="btn btn-default" aria-label="Left Align">
+	  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+	</button>
+ 	</a>
+ 	
+	<a th:href="@{/watch_movie(id=${it.index+1})}" th:each="movie, it : ${movies}">
+	<button type="button" class="btn btn-default" aria-label="Left Align">
+	  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+	</button>
+ 	</a>
+ 	 
 </body>
 </html>

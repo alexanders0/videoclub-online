@@ -28,7 +28,8 @@ public class VideoClubController {
     @Secured({ "ROLE_USER", "ROLE_ADMIN" })
     @RequestMapping("/home")
     public ModelAndView home() {
-        return new ModelAndView("home");
+    	Iterable<Movie> listMovies = repository.findAll(); //list of movies
+        return new ModelAndView("home").addObject("movies", listMovies);
     }
 
     @Secured("ROLE_ADMIN")
@@ -47,16 +48,13 @@ public class VideoClubController {
         return new ModelAndView("manage_users");
     }
     
-    @RequestMapping("/manage_movies")
-    public ModelAndView manageMovies() {
-        return new ModelAndView("manage_movies");
-    }
-    
+    @Secured("ROLE_ADMIN")
     @RequestMapping("/new_movie")
     public ModelAndView newMovie() {
         return new ModelAndView("new_movie");
     }
     
+    @Secured("ROLE_ADMIN")
     @RequestMapping("/insert_movie")
     public ModelAndView insertMovie(@RequestParam String movie_name, 
     		@RequestParam String url_movie) {
@@ -73,7 +71,7 @@ public class VideoClubController {
     @RequestMapping("/search_result")
     public ModelAndView searchResult(@RequestParam String movie_name) {
     	
-    	Iterable<Movie> listMovies = repository.findByName(movie_name);
+    	Iterable<Movie> listMovies = repository.findByNameContaining(movie_name);
         return new ModelAndView("search_result").addObject("movies", listMovies);
     }
     
