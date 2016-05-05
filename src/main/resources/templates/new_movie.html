@@ -7,11 +7,29 @@
 	<body>
 		<h1>Nueva Película</h1><br />
 		<form action="/insert_movie" method="get">
-			<label for="nombre">Nombre</label>
-			<input type="text" name="movie_name" id="movie_name"/><br />
+			<label for="movie_name">Nombre</label>
+			<input type="text" name="movie_name" id="movie_name" required=""/><br />
 			
 			<label for="tema">URL de la película</label>
-			<input type="text" name="url_movie" id="url_movie"/><br />
+			<input type="text" name="url_movie" id="url_movie" required=""/><br />
+			
+			<label for="description">Descripción</label>
+			<input type="text" name="description" id="description"/><br />
+			
+			<label for="year">Año</label>
+			<input type="text" name="year" id="year"/><br />
+			
+			<label for="director">Director</label>
+			<input type="text" name="director" id="director"/><br />
+			
+			<label for="actors">Actores</label>
+			<input type="text" name="actors" id="actors"/><br />
+			
+			<label for="url_cover_film">URL de la portada</label>
+			<input type="text" name="url_cover_film" id="url_cover_film"/><br />
+			
+			<label for="rating">Valoración</label>
+			<input type="number" min="1" max="5" name="rating" id="rating"/><br />
 			
 			<input type="submit" value="Crear nueva película" /><br />
 		</form>

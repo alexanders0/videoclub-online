@@ -3,7 +3,6 @@
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <title>Home</title>
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 
 </head>
@@ -13,7 +12,7 @@
     </h1>
 
     <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <a th:href="@{/root}">Manage users</a>
+        <a th:href="@{/manage_users}">Manage users</a>
         <a th:href="@{/new_movie}">Create movie</a>
     </div>
 
@@ -30,15 +29,15 @@
     
     <br/>
     
-    <a href="@{/watch_movie}" th:href="@{/watch_movie(id=${it.index+1})}" th:each="movie, it : ${movies}" th:text="|${movie.name}|">Película</a> 
+    <a href="@{/watch_movie}" th:href="@{/watch_movie(id=${movie.getId()})}" th:each="movie : ${movies}" th:text="|${movie.getName()}|">Película</a> 
 	
-	<a th:href="@{/watch_movie(id=${it.index+1})}" th:each="movie, it : ${movies}">
+	<a th:href="@{/edit_movie(id=${movie.getId()})}" th:each="movie : ${movies}">
 	<button type="button" class="btn btn-default" aria-label="Left Align">
 	  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 	</button>
  	</a>
  	
-	<a th:href="@{/watch_movie(id=${it.index+1})}" th:each="movie, it : ${movies}">
+	<a th:href="@{/delete_movie(id=${movie.getId()})}" th:each="movie : ${movies}">
 	<button type="button" class="btn btn-default" aria-label="Left Align">
 	  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 	</button>

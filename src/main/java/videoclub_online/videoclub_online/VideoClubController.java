@@ -31,18 +31,8 @@ public class VideoClubController {
     	Iterable<Movie> listMovies = repository.findAll(); //list of movies
         return new ModelAndView("home").addObject("movies", listMovies);
     }
-
+    
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/root")
-    public ModelAndView root() {
-        return new ModelAndView("root");
-    }
-    
-    @RequestMapping("/admin_panel")
-    public ModelAndView adminPanel() {
-        return new ModelAndView("admin_panel");
-    }
-    
     @RequestMapping("/manage_users")
     public ModelAndView manageUsers() {
         return new ModelAndView("manage_users");
@@ -56,18 +46,69 @@ public class VideoClubController {
     
     @Secured("ROLE_ADMIN")
     @RequestMapping("/insert_movie")
-    public ModelAndView insertMovie(@RequestParam String movie_name, 
-    		@RequestParam String url_movie) {
+    public ModelAndView insertMovie(
+    		@RequestParam String movie_name, 
+    		@RequestParam String url_movie,
+    		@RequestParam String description,
+    		@RequestParam String year,
+    		@RequestParam String director,
+    		@RequestParam String actors,
+    		@RequestParam String url_cover_film,
+    		@RequestParam int rating
+    		) {
     	
-    	repository.save(new Movie(movie_name, url_movie));
+    	repository.save(new Movie(movie_name, url_movie, description, 
+    			year, director, actors, url_cover_film, rating));
+    	
         return new ModelAndView("insert_movie");
     }
     
-    @RequestMapping("/search_movies")
-    public ModelAndView searchMovies() {
-        return new ModelAndView("search_movies");
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/edit_movie")
+    public ModelAndView editMovie(@RequestParam long id) {
+    	movie = repository.findOne(id);
+        return new ModelAndView("edit_movie").addObject("movie", movie);
     }
     
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/update_movie")
+    public ModelAndView updateMovie(
+    		@RequestParam long id,
+    		@RequestParam String movie_name, 
+    		@RequestParam String url_movie,
+    		@RequestParam String description,
+    		@RequestParam String year,
+    		@RequestParam String director,
+    		@RequestParam String actors,
+    		@RequestParam String url_cover_film,
+    		@RequestParam int rating
+    		) {
+    	
+//    	fields updated
+    	movie = repository.findOne(id);
+    	movie.setName(movie_name);
+    	movie.setUrlMovie(url_movie);
+    	movie.setDescription(description);
+    	movie.setYear(year);
+    	movie.setDirector(director);
+    	movie.setActors(actors);
+    	movie.setUrlCoverFilm(url_cover_film);
+    	movie.setRating(rating);
+    	
+    	repository.save(movie); //object saved
+    	
+        return new ModelAndView("update_movie");
+    }
+    
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/delete_movie")
+    public ModelAndView deleteMovie(@RequestParam long id) {
+    	movie = repository.findOne(id);
+    	repository.delete(movie);
+        return new ModelAndView("delete_movie");
+    }
+    
+    @Secured({ "ROLE_USER", "ROLE_ADMIN" })
     @RequestMapping("/search_result")
     public ModelAndView searchResult(@RequestParam String movie_name) {
     	
@@ -75,9 +116,9 @@ public class VideoClubController {
         return new ModelAndView("search_result").addObject("movies", listMovies);
     }
     
+    @Secured({ "ROLE_USER", "ROLE_ADMIN" })
     @RequestMapping("/watch_movie")
     public ModelAndView watchMovie(@RequestParam long id) {
-    	
     	movie = repository.findOne(id);
         return new ModelAndView("watch_movie").addObject("movie", movie);
     }

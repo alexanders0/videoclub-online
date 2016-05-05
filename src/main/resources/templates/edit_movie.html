@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Panel de Administración - Usuarios</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<form action="/update_movie" method="get">
+			<input type="hidden" name="id" th:value="${movie.getId()}"/>
+			<label for="movie_name">Nombre</label>
+			<input type="text" name="movie_name" id="movie_name" required="" th:value="${movie.getName()}"/><br />
+			
+			<label for="tema">URL de la película</label>
+			<input type="text" name="url_movie" id="url_movie" required="" th:value="${movie.getUrlMovie()}"/><br />
+			
+			<label for="description">Descripción</label>
+			<input type="text" name="description" id="description" th:value="${movie.getDescription()}"/><br />
+			
+			<label for="year">Año</label>
+			<input type="text" name="year" id="year" th:value="${movie.getYear()}"/><br />
+			
+			<label for="director">Director</label>
+			<input type="text" name="director" id="director" th:value="${movie.getDirector()}"/><br />
+			
+			<label for="actors">Actores</label>
+			<input type="text" name="actors" id="actors" th:value="${movie.getActors()}"/><br />
+			
+			<label for="url_cover_film">URL de la portada</label>
+			<input type="text" name="url_cover_film" id="url_cover_film" th:value="${movie.getUrlCoverFilm()}"/><br />
+			
+			<label for="rating">Valoración</label>
+			<input type="number" min="1" max="5" name="rating" id="rating" th:value="${movie.getRating()}"/><br />
+			
+			<input type="submit" value="Actualizar película" /><br />
+		</form>
+	</body>
+</html>

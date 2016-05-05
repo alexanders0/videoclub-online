@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Panel de Administración - Usuarios</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 		<meta charset="utf-8" />
 	</head>
 	<body>
@@ -15,5 +16,18 @@
 		<p th:text="${movie.getRating()}">Valoración</p>
 	    <iframe width="560" height="315" th:src="${movie.getUrlMovie()}">
 	    </iframe>
+	    
+		<a th:href="@{/edit_movie(id=${movie.getId()})}">
+		<button type="button" class="btn btn-default" aria-label="Left Align">
+		  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+		</button>
+	 	</a>
+	 	
+		<a th:href="@{/delete_movie(id=${movie.getId()})}">
+		<button type="button" class="btn btn-default" aria-label="Left Align">
+		  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		</button>
+	 	</a>
+	 	
 	</body>
 </html>
