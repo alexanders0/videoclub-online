@@ -6,24 +6,22 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<h1>Gestionar Usuarios</h1><br />
-		<h2>CRUD de los Usuarios</h2><br />
-			<a th:href="@{/new_user}">Crear Usuario</a>
-			
-		<h2>Usuarios</h2>
-		    <a href="@{/user}" th:href="@{/user(id=${user.getId()})}" th:each="user : ${users}" th:text="|${user.getUser()}|">Película</a> 
-			
-			<a th:href="@{/edit_user(id=${user.getId()})}" th:each="user : ${users}">
+		<h1>Usuario</h1><br />
+		<h2 th:text="${user.getUser()}">Username</h2><br />
+		<p th:text="${user.getPasswordHash()}">password</p>
+		<p th:text="${user.getEmail()}">email</p>
+	    
+		<a th:href="@{/edit_user(id=${user.getId()})}" th:each="user : ${users}">
 			<button type="button" class="btn btn-default" aria-label="Left Align">
 			  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 			</button>
-		 	</a>
+	 	</a>
 		 	
-			<a th:href="@{/delete_user(id=${user.getId()})}" th:each="user : ${users}">
+		<a th:href="@{/delete_user(id=${user.getId()})}" th:each="user : ${users}">
 			<button type="button" class="btn btn-default" aria-label="Left Align">
 			  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 			</button>
-		 	</a>
-		
+	 	</a>
+	 	
 	</body>
 </html>

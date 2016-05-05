@@ -20,8 +20,8 @@ public class User {
     private Long id;
 
     private String user;
-
     private String password;
+    private String email;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<GrantedAuthority> roles;
@@ -29,19 +29,28 @@ public class User {
     public User() {
     }
 
-    public User(String user, String password, List<GrantedAuthority> roles) {
+    public User(String user, String password, String email, List<GrantedAuthority> roles) {
         this.user = user;
         this.password = new BCryptPasswordEncoder().encode(password);
+        this.email = email;
         this.roles = roles;
     }
 
     // getters, setters
 
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
     public String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+	public void setUser(String user) {
         this.user = user;
     }
 
@@ -53,7 +62,15 @@ public class User {
         this.password = passwordHash;
     }
 
-    public List<GrantedAuthority> getRoles() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<GrantedAuthority> getRoles() {
         return roles;
     }
 
