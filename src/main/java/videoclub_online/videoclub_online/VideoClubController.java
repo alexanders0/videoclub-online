@@ -40,13 +40,13 @@ public class VideoClubController {
     @RequestMapping("/home")
     public ModelAndView home() {
     	Iterable<Movie> listMovies = movieRepository.findAll(); //list of movies
-        return new ModelAndView("home").addObject("movies", listMovies);
+        return new ModelAndView("home").addObject("movies", listMovies); //anadir objeto con rol
     }
     
     @Secured("ROLE_ADMIN")
     @RequestMapping("/manage_users")
     public ModelAndView manageUsers() {
-    	Iterable<User> listUsers = userRepository.findAll(); //list of movies
+    	Iterable<User> listUsers = userRepository.findAll(); //list of users
         return new ModelAndView("manage_users").addObject("users", listUsers);
     }
     
