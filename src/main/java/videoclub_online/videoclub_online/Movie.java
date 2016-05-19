@@ -15,7 +15,7 @@ public class Movie {
 	private String name;
 	private String urlMovie;
 	private String description;
-	private String year;
+	private int year;
 	private String director;
 	private String actors;
 	private String urlCoverFilm;
@@ -29,7 +29,7 @@ public class Movie {
 		this.urlMovie = urlPelicula;
 	}
 	
-	public Movie(String nombre, String urlPelicula, String descripcion, String anio, String director, String actores,
+	public Movie(String nombre, String urlPelicula, String descripcion, int anio, String director, String actores,
 			String urlPortada, int valoracion) {
 		this.name = nombre;
 		this.urlMovie = urlPelicula;
@@ -74,11 +74,11 @@ public class Movie {
 		this.description = description;
 	}
 
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Panel de Administración - User</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h2>¿Está seguro?</h2>
+		<p>¿Está seguro de que quiere borrar el usuario "<span th:text="|${user.getUser()}|">username</span>"?</p><br />
+		<a th:href="@{/delete_user(id=${user.getId()})}">
+			<button type="button" class="btn btn-danger">Sí, estoy seguro</button>
+		</a>
+		<a th:href="@{/manage_users}">
+			<button type="button" class="btn btn-default">No, llévame atrás</button>
+		</a>
+	</body>
+</html>

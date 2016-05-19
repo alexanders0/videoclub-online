@@ -20,6 +20,10 @@ public class VideoClubController {
 	GrantedAuthority[] userRoles = {
             new SimpleGrantedAuthority("ROLE_USER") };
 	
+	GrantedAuthority[] adminRoles = {
+			new SimpleGrantedAuthority("ROLE_USER"),
+			new SimpleGrantedAuthority("ROLE_ADMIN") };
+	
 	@Autowired
 	private MovieRepository movieRepository;
 	
@@ -38,9 +42,15 @@ public class VideoClubController {
     
     @Secured({ "ROLE_USER", "ROLE_ADMIN" })
     @RequestMapping("/home")
-    public ModelAndView home() {
-    	Iterable<Movie> listMovies = movieRepository.findAll(); //list of movies
-        return new ModelAndView("home").addObject("movies", listMovies); //anadir objeto con rol
+    public ModelAndView home(@RequestParam(required = false) String search) {
+    	Iterable<Movie> listMovies;
+    	if (search != null){
+    		listMovies = movieRepository.findByNameContaining(search); //movie list by parameter
+    	} else{
+    		listMovies = movieRepository.findAll(); //all movie list
+    	}
+    	
+        return new ModelAndView("home").addObject("movies", listMovies);
     }
     
     @Secured("ROLE_ADMIN")
@@ -60,9 +70,16 @@ public class VideoClubController {
     @RequestMapping("/insert_user")
     public ModelAndView insertUser(@RequestParam String username, 
     		@RequestParam String password, 
-    		@RequestParam String email
+    		@RequestParam String email,
+    		@RequestParam String role
     		) {
-    	userRepository.save(new User(username, password, email, Arrays.asList(userRoles)));
+    	
+    	if (role.equals("1")) {
+    		userRepository.save(new User(username, password, email, Arrays.asList(userRoles)));
+		} else {
+			userRepository.save(new User(username, password, email, Arrays.asList(adminRoles)));
+		}
+    	
         return new ModelAndView("insert_user");
     }
     
@@ -79,7 +96,8 @@ public class VideoClubController {
     		@RequestParam long id,
     		@RequestParam String username, 
     		@RequestParam String password,
-    		@RequestParam String email
+    		@RequestParam String email,
+    		@RequestParam String role
     		) {
     	
 //    	fields updated
@@ -88,9 +106,22 @@ public class VideoClubController {
     	user.setPasswordHash(password);
     	user.setEmail(email);
     	
+    	if (role.equals("1")) {
+    		user.setRoles(Arrays.asList(userRoles));
+		} else {
+			user.setRoles(Arrays.asList(adminRoles));
+		}
+    	
     	userRepository.save(user); //object saved
     	
         return new ModelAndView("update_user");
+    }
+
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/warning_user")
+    public ModelAndView warningUser(@RequestParam long id) {
+    	user = userRepository.findOne(id);
+        return new ModelAndView("warning_user").addObject("user", user);
     }
     
     @Secured("ROLE_ADMIN")
@@ -120,7 +151,7 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam String year,
+    		@RequestParam int year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
@@ -147,7 +178,7 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam String year,
+    		@RequestParam int year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
@@ -168,6 +199,13 @@ public class VideoClubController {
     	movieRepository.save(movie); //object saved
     	
         return new ModelAndView("update_movie");
+    }
+    
+    @Secured("ROLE_ADMIN")
+    @RequestMapping("/warning_movie")
+    public ModelAndView warningMovie(@RequestParam long id) {
+    	movie = movieRepository.findOne(id);
+        return new ModelAndView("warning_movie").addObject("movie", movie);
     }
     
     @Secured("ROLE_ADMIN")

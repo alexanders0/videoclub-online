@@ -1,45 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>Filmaholic</title>
+  <head>
+  	<title>Filmaholic</title>
+    <meta charset="utf-8"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-	<link href="//fonts.googleapis.com/css?family=Tangerine" rel="stylesheet" type="text/css"/>
-	<link rel="stylesheet" href="css/style.css"/>
-	<style>
-      h1 {
-        font-family: 'Tangerine', serif;
-        font-size: 48px;
-      }
-    </style>
-</head>
-<body>
+	<link href="css/signin.css" rel="stylesheet"/>
+    <link rel="icon" href="images/movie.ico"/>
 
-<h1><img src="images/logos/logo1.png" alt="Filmaholic" width="371" height="95"/></h1>
-<div id="login-background">
-    <div class="col-md-10" id="login">
+  </head>
+
+  <body>
+
+    <div class="container">
 
       <form class="form-signin" th:action="@{/login}" method="post">
-        <h4 class="form-signin-heading">Please login</h4>
+        <h2 class="form-signin-heading text-muted">Please sign in</h2>
         <label for="inputUsername" class="sr-only">Username</label>
         <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus=""/>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required=""/>
-        <button class="btn btn-primary btn-block" type="submit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+	      <div th:if="${param.error}">
+			  <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+			  <span class="text-danger">Invalid credentials</span>
+		  </div>
+		  <div th:if="${param.logout}">
+			  <span class="glyphicon glyphicon-log-out text-info" aria-hidden="true"></span>
+			  <span class="text-info">Logged out</span>
+		  </div>
       </form>
-
-		<div th:if="${param.error}" class="alert alert-danger" role="alert">
-		  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-		  <span class="sr-only">Error:</span>
-		  Invalid credentials
-		</div>
 		
-		<div th:if="${param.logout}" class="alert alert-info" role="alert">
-		  <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-		  Logged out
-		</div>
-	
-    </div>
-</div>
+    </div> <!-- /container -->
 
-</body>
+  </body>
 </html>

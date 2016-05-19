@@ -16,6 +16,12 @@
 			<label for="email">Correo</label>
 			<input type="email" name="email" id="email" required="" th:value="${user.getEmail()}"/><br />
 			
+			<label>Rol de Usuario</label>
+			<select class="form-control" name="role">
+		        <option value="1">User</option>
+		        <option value="2">Admin</option>
+			</select>
+			
 			<input type="submit"/><br />
 		</form>
 	</body>

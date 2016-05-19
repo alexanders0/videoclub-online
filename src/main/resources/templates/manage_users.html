@@ -11,19 +11,41 @@
 			<a th:href="@{/new_user}">Crear Usuario</a>
 			
 		<h2>Usuarios</h2>
-		    <a href="@{/user}" th:href="@{/user(id=${user.getId()})}" th:each="user : ${users}" th:text="|${user.getUser()}|">Película</a> 
-			
-			<a th:href="@{/edit_user(id=${user.getId()})}" th:each="user : ${users}">
-			<button type="button" class="btn btn-default" aria-label="Left Align">
-			  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-			</button>
-		 	</a>
-		 	
-			<a th:href="@{/delete_user(id=${user.getId()})}" th:each="user : ${users}">
-			<button type="button" class="btn btn-default" aria-label="Left Align">
-			  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-			</button>
-		 	</a>
-		
+
+		<div class="container">
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th>Usuario</th>
+			      <th>Contraseña</th>
+			      <th>Correo</th>
+			      <th>Acción</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="user : ${users}">
+			      <td th:text="|${user.getUser()}|">username</td>
+			      <td th:text="|${user.getPasswordHash()}|">password</td>
+			      <td th:text="|${user.getEmail()}|">mail@mail.com</td>
+			      <td>
+					<a th:href="@{/edit_user(id=${user.getId()})}">
+					<button type="button" class="btn btn-primary" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					</button>
+				 	</a>
+				 	
+					<a th:href="@{/warning_user(id=${user.getId()})}">
+					<button type="button" class="btn btn-danger" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+				 	</a>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
 	</body>
 </html>
+
+           
+
