@@ -84,8 +84,8 @@
 		        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 		        <a th:href="@{/watch_movie(id=${movie.getId()})}" class="btn btn-primary" role="button">Ver Info</a>  
 		        <div sec:authorize="hasRole('ROLE_ADMIN')">
-		          <a th:href="@{/edit_movie(id=${movie.getId()})}" class="glyphicon glyphicon-edit" role="button" pull-right=""></a>
-		          <a th:href="@{/warning_movie(id=${movie.getId()})}" class="glyphicon glyphicon-remove text-danger" role="button" pull-right=""></a>
+		          <a th:href="@{/warning_movie(id=${movie.getId()})}" class="glyphicon glyphicon-remove text-danger pull-right" role="button" pull-right=""></a> 
+		          <a th:href="@{/edit_movie(id=${movie.getId()})}" class="glyphicon glyphicon-edit pull-right" role="button" pull-right=""></a><br/>
 		        </div>
 		      </div>
 		    </div>

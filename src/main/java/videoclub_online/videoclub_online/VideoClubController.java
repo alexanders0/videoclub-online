@@ -151,15 +151,14 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam int year,
+    		@RequestParam String year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam int rating
+    		@RequestParam String rating
     		) {
     	
-    	movieRepository.save(new Movie(movie_name, url_movie, description, 
-    			year, director, actors, url_cover_film, rating));
+    	movieRepository.save(new Movie(movie_name, url_movie));
     	
         return new ModelAndView("insert_movie");
     }
@@ -214,14 +213,6 @@ public class VideoClubController {
     	movie = movieRepository.findOne(id);
     	movieRepository.delete(movie);
         return new ModelAndView("delete_movie");
-    }
-    
-    @Secured({ "ROLE_USER", "ROLE_ADMIN" })
-    @RequestMapping("/search_result")
-    public ModelAndView searchResult(@RequestParam String movie_name) {
-    	
-    	Iterable<Movie> listMovies = movieRepository.findByNameContaining(movie_name);
-        return new ModelAndView("search_result").addObject("movies", listMovies);
     }
     
     @Secured({ "ROLE_USER", "ROLE_ADMIN" })
