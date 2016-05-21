@@ -69,34 +69,69 @@
       <div class="page-header">
         <h1>New Movie...</h1>
       </div>
-      
-		<form action="/insert_movie" method="get">
-			<label for="movie_name">Nombre</label>
-			<input type="text" name="movie_name" id="movie_name" required=""/><br />
-			
-			<label for="tema">URL de la película</label>
-			<input type="text" name="url_movie" id="url_movie" required=""/><br />
-			
-			<label for="description">Descripción</label>
-			<input type="text" name="description" id="description"/><br />
-			
-			<label for="year">Año</label>
-			<input type="text" name="year" id="year"/><br />
-			
-			<label for="director">Director</label>
-			<input type="text" name="director" id="director"/><br />
-			
-			<label for="actors">Actores</label>
-			<input type="text" name="actors" id="actors"/><br />
-			
-			<label for="url_cover_film">URL de la portada</label>
-			<input type="text" name="url_cover_film" id="url_cover_film"/><br />
-			
-			<label for="rating">Valoración</label>
-			<input type="number" min="1" max="5" name="rating" id="rating"/><br />
-			
-			<button type="submit" class="btn btn-primary">Crear Película</button>
-		</form>
+
+		<div class="row">
+			<div class="col-md-6">
+				<form class="form-horizontal" role="form" action="/insert_movie" method="get">
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="movie_name">* Nombre:</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="movie_name" name="movie_name" placeholder="Movie name" required=""/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="url_movie">* URL de la película:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="url_movie" name="url_movie" placeholder="Movie url" required=""/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="description">Sinopsis:</label>
+				    <div class="col-sm-8">
+				      <textarea class="form-control" rows="3" id="description" name="description" placeholder="Sinopsis"></textarea>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="year">Año:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="year" name="year" placeholder="Year"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="director">Director:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="director" name="director" placeholder="Director"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="actors">Reparto:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="actors" name="actors" placeholder="Actors"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="url_cover_film">URL de la portada:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="url_cover_film" name="url_cover_film" placeholder="Movie cover"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="rating">Valoración:</label>
+				    <div class="col-sm-8">          
+				      <input type="number" min="1" max="5" class="form-control" id="rating" name="rating"/>
+				    </div>
+				  </div>
+				  
+				  <p class="col-sm-offset-4 col-sm-8 text-danger"> * Campos obligatorios</p>
+				
+				  <div class="form-group">        
+				    <div class="col-sm-offset-4 col-sm-8">
+				      <button type="submit" class="btn btn-primary">Crear Película</button>
+				    </div>
+				  </div>
+				</form>	
+			</div>
+		</div>
 
     </div>
     <!-- End of page content -->

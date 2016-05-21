@@ -70,34 +70,69 @@
         <h1>Edit Movie...</h1>
       </div>
       
-		<form action="/update_movie" method="get">
-			<input type="hidden" name="id" th:value="${movie.getId()}"/>
-			<label for="movie_name">Nombre</label>
-			<input type="text" name="movie_name" id="movie_name" required="" th:value="${movie.getName()}"/><br />
-			
-			<label for="tema">URL de la película</label>
-			<input type="text" name="url_movie" id="url_movie" required="" th:value="${movie.getUrlMovie()}"/><br />
-			
-			<label for="description">Descripción</label>
-			<input type="text" name="description" id="description" th:value="${movie.getDescription()}"/><br />
-			
-			<label for="year">Año</label>
-			<input type="text" name="year" id="year" th:value="${movie.getYear()}"/><br />
-			
-			<label for="director">Director</label>
-			<input type="text" name="director" id="director" th:value="${movie.getDirector()}"/><br />
-			
-			<label for="actors">Actores</label>
-			<input type="text" name="actors" id="actors" th:value="${movie.getActors()}"/><br />
-			
-			<label for="url_cover_film">URL de la portada</label>
-			<input type="text" name="url_cover_film" id="url_cover_film" th:value="${movie.getUrlCoverFilm()}"/><br />
-			
-			<label for="rating">Valoración</label>
-			<input type="number" min="1" max="5" name="rating" id="rating" th:value="${movie.getRating()}"/><br />
-			
-			<input type="submit" value="Actualizar película" /><br />
-		</form>
+		<div class="row">
+			<div class="col-md-6">
+				<form class="form-horizontal" role="form" action="/update_movie" method="get">
+					<input type="hidden" name="id" th:value="${movie.getId()}"/>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="movie_name">* Nombre:</label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="movie_name" name="movie_name" placeholder="Movie name" required="" th:value="${movie.getName()}"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="url_movie">* URL de la película:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="url_movie" name="url_movie" placeholder="Movie url" required="" th:value="${movie.getUrlMovie()}"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="description">Sinopsis:</label>
+				    <div class="col-sm-8">
+				      <textarea class="form-control" rows="3" id="description" name="description" placeholder="Sinopsis" th:value="${movie.getDescription()}"></textarea>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="year">Año:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="year" name="year" placeholder="Year" th:value="${movie.getYear()}"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="director">Director:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="director" name="director" placeholder="Director" th:value="${movie.getDirector()}"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="actors">Reparto:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="actors" name="actors" placeholder="Actors" th:value="${movie.getActors()}"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="url_cover_film">URL de la portada:</label>
+				    <div class="col-sm-8">          
+				      <input type="text" class="form-control" id="url_cover_film" name="url_cover_film" placeholder="Movie cover" th:value="${movie.getUrlCoverFilm()}"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="control-label col-sm-4" for="rating">Valoración:</label>
+				    <div class="col-sm-8">          
+				      <input type="number" min="1" max="5" class="form-control" id="rating" name="rating" th:value="${movie.getRating()}"/>
+				    </div>
+				  </div>
+				  
+				  <p class="col-sm-offset-4 col-sm-8 text-danger"> * Campos obligatorios</p>
+				
+				  <div class="form-group">        
+				    <div class="col-sm-offset-4 col-sm-8">
+				      <button type="submit" class="btn btn-primary">Actualizar Película</button>
+				    </div>
+				  </div>
+				</form>	
+			</div>
+		</div>
 
     </div>
     <!-- End of page content -->
