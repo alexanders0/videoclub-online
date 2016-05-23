@@ -59,7 +59,7 @@ public class User {
     }
 
     public void setPasswordHash(String passwordHash) {
-        this.password = passwordHash;
+    	this.password = new BCryptPasswordEncoder().encode(passwordHash);
     }
 
     public String getEmail() {

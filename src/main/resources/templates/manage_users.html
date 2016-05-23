@@ -70,14 +70,21 @@
         <h1>Gestionar Usuarios...</h1>
       </div>
       
+		<div th:if="${message}" class="alert alert-success alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>Éxito!</strong> <span th:text="${message}">Usuario creado correctamente!!!</span>
+		</div>
+      
       <p><a class="btn btn-primary" th:href="@{/new_user}">Crear usuario</a></p>
       
+      <div class="table-responsive">
 		<table class="table table-hover">
 		  <thead>
 		    <tr>
 		      <th>Usuario</th>
 		      <th>Contraseña</th>
 		      <th>Correo</th>
+		      <th>Rol</th>
 		      <th>Acción</th>
 		    </tr>
 		  </thead>
@@ -86,6 +93,7 @@
 		      <td th:text="|${user.getUser()}|">username</td>
 		      <td th:text="|${user.getPasswordHash()}|">password</td>
 		      <td th:text="|${user.getEmail()}|">mail@mail.com</td>
+		      <td th:text="|${user.getRoles()}|">role</td>
 		      <td>
 				<a th:href="@{/edit_user(id=${user.getId()})}">
 				<button type="button" class="btn btn-primary" aria-label="Left Align">
@@ -102,6 +110,7 @@
 		    </tr>
 		  </tbody>
 		</table>
+	 	</div>
 
     </div>
     <!-- End of page content -->

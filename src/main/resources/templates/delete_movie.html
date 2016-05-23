@@ -69,9 +69,10 @@
       <div class="page-header">
         <h1>Eliminar Película...</h1>
       </div>
-
-		<p>Película eliminada correctamente!</p><br />
-		<a th:href="@{/home}">Regresar al home</a>
+		<div class="alert alert-success" role="alert">Película eliminada correctamente!</div>
+		<a th:href="@{/home}">
+			<button type="button" class="btn btn-primary">Regresar al home</button>
+		</a>
 
     </div>
     <!-- End of page content -->

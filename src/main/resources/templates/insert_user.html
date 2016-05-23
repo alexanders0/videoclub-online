@@ -69,9 +69,11 @@
       <div class="page-header">
         <h1>User Saved...</h1>
       </div>
-      
-		<p>Usuario creado correctamente!</p><br />
-		<a th:href="@{/manage_users}">Regresar al Panel</a>
+
+      <div class="alert alert-success" role="alert">Usuario creado correctamente!</div>
+		<a th:href="@{/manage_users}">
+			<button type="button" class="btn btn-primary">Regresar al Panel</button>
+		</a>
 
     </div>
     <!-- End of page content -->

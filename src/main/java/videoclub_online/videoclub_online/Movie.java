@@ -1,5 +1,6 @@
 package videoclub_online.videoclub_online;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ public class Movie {
 	
 	private String name;
 	private String urlMovie;
+	
+	@Column(length = 1000)
 	private String description;
 	private int year;
 	private String director;

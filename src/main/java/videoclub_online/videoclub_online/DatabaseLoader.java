@@ -37,7 +37,11 @@ public class DatabaseLoader {
         movieRepository.save( new Movie( 
         		"Interestelar",
         		"https://www.youtube.com/embed/qPBRz8LcWn0",
-        		"Interestelar description",
+        		"Inspirada en la teoría del experto en relatividad Kip Stepehen Thorne sobre la existencia de "
+        		+ "los agujeros de gusano, y su función como canal para llevar a cabo los viajes en el tiempo. "
+        		+ "La historia gira en torno a un grupo de intrépidos exploradores que se adentran por uno de esos "
+        		+ "agujeros y viajan a través del mismo, encontrándose en otra dimensión. Un mundo desconocido se abre "
+        		+ "ante ellos y deberán luchar por mantenerse unidos si quieren volver de una pieza.",
         		2014, 
         		"Christopher Nolan",
         		"Matthew McConaughey, Anne Hathaway, Jessica Chastain", 
@@ -49,7 +53,12 @@ public class DatabaseLoader {
         movieRepository.save( new Movie( 
         		"The revenant",
         		"https://www.youtube.com/embed/QRfj1VCg16Y",
-        		"The Revenant description",
+        		"Año 1823. En las profundidades de la América salvaje, el explorador Hugh Glass (Leonardo DiCaprio) "
+        		+ "participa junto a su hijo mestizo Hawk en una expedición de tramperos que recolecta pieles. Glass "
+        		+ "resulta gravemente herido por el ataque de un oso y es abandonado a su suerte por un traicionero "
+        		+ "miembro de su equipo, John Fitzgerald (Tom Hardy). Con la fuerza de voluntad como su única arma, "
+        		+ "Glass deberá enfrentarse a un territorio hostil, a un invierno brutal y a la guerra constante entre "
+        		+ "las tribus de nativos americanos, en una búsqueda implacable para conseguir vengarse.",
         		2015, 
         		"Alejandro G. Iñárritu",
         		"Leonardo DiCaprio, Tom Hardy, Will Poulter", 

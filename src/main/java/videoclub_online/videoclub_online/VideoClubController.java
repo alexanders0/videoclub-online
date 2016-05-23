@@ -8,8 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class VideoClubController {
@@ -91,13 +93,14 @@ public class VideoClubController {
     }
     
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/update_user")
-    public ModelAndView updateUser(
+    @RequestMapping(value = "/update_user", method = { RequestMethod.GET, RequestMethod.POST })
+    public String updateUser(
     		@RequestParam long id,
     		@RequestParam String username, 
     		@RequestParam String password,
     		@RequestParam String email,
-    		@RequestParam String role
+    		@RequestParam String role,
+    		RedirectAttributes redirectAttributes
     		) {
     	
 //    	fields updated
@@ -106,15 +109,16 @@ public class VideoClubController {
     	user.setPasswordHash(password);
     	user.setEmail(email);
     	
-    	if (role.equals("1")) {
-    		user.setRoles(Arrays.asList(userRoles));
-		} else {
-			user.setRoles(Arrays.asList(adminRoles));
-		}
-    	
+//    	if (role.equals("1")) {
+//    		user.setRoles(Arrays.asList(userRoles));
+//		} else {
+//			user.setRoles(Arrays.asList(adminRoles));
+//		}
+//    	
     	userRepository.save(user); //object saved
-    	
-        return new ModelAndView("update_user");
+    	String message = "Usuario actualizado correctamene!";
+    	redirectAttributes.addFlashAttribute("message", message);
+    	return "redirect:/manage_users";
     }
 
     @Secured("ROLE_ADMIN")
@@ -151,11 +155,11 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam String year,
+    		@RequestParam(required = false) int year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam String rating
+    		@RequestParam(required = false) int rating
     		) {
     	
     	movieRepository.save(new Movie(movie_name, url_movie));
@@ -177,11 +181,11 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam int year,
+    		@RequestParam(required = false) int year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam int rating
+    		@RequestParam(required = false) int rating
     		) {
     	
 //    	fields updated

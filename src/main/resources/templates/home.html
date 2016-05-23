@@ -81,7 +81,9 @@
 		        <h4>
 		          <a href="@{/watch_movie}" th:href="@{/watch_movie(id=${movie.getId()})}" th:text="|${movie.getName()}|">Película</a>
 		        </h4>
-		        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+		        <div th:if="${movie.getDescription()}">
+		        	<p th:if="${movie.getDescription() != ''}" th:text="|${#strings.substring(movie.getDescription(),0,199)}...|">sinopsis</p>
+		        </div> 
 		        <a th:href="@{/watch_movie(id=${movie.getId()})}" class="btn btn-primary" role="button">Ver Info</a>  
 		        <div sec:authorize="hasRole('ROLE_ADMIN')">
 		          <a th:href="@{/warning_movie(id=${movie.getId()})}" class="glyphicon glyphicon-remove text-danger pull-right" role="button" pull-right=""></a> 

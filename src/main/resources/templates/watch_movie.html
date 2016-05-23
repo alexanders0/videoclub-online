@@ -100,20 +100,20 @@
 				
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="descripcion"><br/>
-						<p th:text="${movie.getDescription()}">description</p><p>Un antropólogo de Harvard es enviado a Haití para investigar una extraña sustancia relacionada con la magia negra y el vudú, que podría servir para salvar vidas humanas. Mientras él busca la milagrosa droga, ciertos científicos escépticos se niegan a aceptar la existencia de zombies y ritos sangrientos.</p>	
+						<p th:text="${movie.getDescription()}">description</p>	
 					</div>
 					
 					<div class="tab-pane fade" id="ficha_tecnica">
 						<dl class="dl-horizontal"><br/>
-							<dt>Título original:</dt><dd>The Serpent and the Rainbow</dd>
+							<dt>Título original:</dt><dd>movie name</dd>
 							<dt>Año:</dt><dd th:text="${movie.getYear()}">year</dd>
-							<dt>Duración:</dt><dd>98 min</dd>
-							<dt>País:</dt><dd>USA</dd>
+							<dt>Duración:</dt><dd>movie length</dd>
+							<dt>País:</dt><dd>country</dd>
 							<dt>Director:</dt><dd th:text="${movie.getDirector()}">director</dd>
-							<dt>Escritor:</dt><dd>Wade Davis (inspired by the book), Richard Maxwell (screenplay), Adam Rodman (screenplay)</dd>
+							<dt>Escritor:</dt><dd>writer</dd>
 							<dt>Reparto:</dt><dd th:text="${movie.getActors()}">actors</dd>
-							<dt>Productora:</dt><dd>Universal Pictures</dd>
-							<dt>Género:</dt><dd>Terror,Suspense</dd>
+							<dt>Productora:</dt><dd>producer</dd>
+							<dt>Género:</dt><dd>Kind</dd>
 						</dl>
 					</div>
 				</div>
