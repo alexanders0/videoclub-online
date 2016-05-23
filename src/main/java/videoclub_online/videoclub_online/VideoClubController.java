@@ -69,11 +69,12 @@ public class VideoClubController {
     }
     
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/insert_user")
-    public ModelAndView insertUser(@RequestParam String username, 
+    @RequestMapping(value = "/insert_user", method = { RequestMethod.GET, RequestMethod.POST })
+    public String insertUser(@RequestParam String username, 
     		@RequestParam String password, 
     		@RequestParam String email,
-    		@RequestParam String role
+    		@RequestParam String role,
+    		RedirectAttributes redirectAttributes
     		) {
     	
     	if (role.equals("1")) {
@@ -82,7 +83,9 @@ public class VideoClubController {
 			userRepository.save(new User(username, password, email, Arrays.asList(adminRoles)));
 		}
     	
-        return new ModelAndView("insert_user");
+    	redirectAttributes.addFlashAttribute("message", "Usuario ingresado correctamene!");
+    	redirectAttributes.addFlashAttribute("type_message", "create");
+    	return "redirect:/manage_users";
     }
     
     @Secured("ROLE_ADMIN")
@@ -116,8 +119,8 @@ public class VideoClubController {
 //		}
 //    	
     	userRepository.save(user); //object saved
-    	String message = "Usuario actualizado correctamene!";
-    	redirectAttributes.addFlashAttribute("message", message);
+    	redirectAttributes.addFlashAttribute("message", "Usuario actualizado correctamene!");
+    	redirectAttributes.addFlashAttribute("type_message", "update");
     	return "redirect:/manage_users";
     }
 
@@ -129,11 +132,13 @@ public class VideoClubController {
     }
     
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/delete_user")
-    public ModelAndView deleteUser(@RequestParam long id) {
+    @RequestMapping(value = "/delete_user", method = { RequestMethod.GET, RequestMethod.POST })
+    public String deleteUser(@RequestParam long id, RedirectAttributes redirectAttributes) {
     	user = userRepository.findOne(id);
     	userRepository.delete(user);
-        return new ModelAndView("delete_user");
+    	redirectAttributes.addFlashAttribute("message", "Usuario eliminado correctamene!");
+    	redirectAttributes.addFlashAttribute("type_message", "delete");
+    	return "redirect:/manage_users";
     }
     
     @Secured({ "ROLE_ADMIN" })
@@ -150,8 +155,8 @@ public class VideoClubController {
     }
     
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/insert_movie")
-    public ModelAndView insertMovie(
+    @RequestMapping(value = "/insert_movie", method = { RequestMethod.GET, RequestMethod.POST })
+    public String insertMovie(
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
@@ -159,12 +164,15 @@ public class VideoClubController {
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam(required = false) int rating
+    		@RequestParam(required = false) int rating,
+    		RedirectAttributes redirectAttributes
     		) {
     	
     	movieRepository.save(new Movie(movie_name, url_movie));
     	
-        return new ModelAndView("insert_movie");
+    	redirectAttributes.addFlashAttribute("message", "Película ingresada correctamene!");
+    	redirectAttributes.addFlashAttribute("type_message", "create");
+    	return "redirect:/home";
     }
     
     @Secured("ROLE_ADMIN")
@@ -175,8 +183,8 @@ public class VideoClubController {
     }
     
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/update_movie")
-    public ModelAndView updateMovie(
+    @RequestMapping(value = "/update_movie", method = { RequestMethod.GET, RequestMethod.POST })
+    public String updateMovie(
     		@RequestParam long id,
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
@@ -185,7 +193,8 @@ public class VideoClubController {
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam(required = false) int rating
+    		@RequestParam(required = false) int rating,
+    		RedirectAttributes redirectAttributes
     		) {
     	
 //    	fields updated
@@ -201,7 +210,9 @@ public class VideoClubController {
     	
     	movieRepository.save(movie); //object saved
     	
-        return new ModelAndView("update_movie");
+    	redirectAttributes.addFlashAttribute("message", "Película actualizada correctamene!");
+    	redirectAttributes.addFlashAttribute("type_message", "update");
+    	return "redirect:/home";
     }
     
     @Secured("ROLE_ADMIN")
@@ -212,11 +223,13 @@ public class VideoClubController {
     }
     
     @Secured("ROLE_ADMIN")
-    @RequestMapping("/delete_movie")
-    public ModelAndView deleteMovie(@RequestParam long id) {
+    @RequestMapping(value = "/delete_movie", method = { RequestMethod.GET, RequestMethod.POST })
+    public String deleteMovie(@RequestParam long id, RedirectAttributes redirectAttributes) {
     	movie = movieRepository.findOne(id);
     	movieRepository.delete(movie);
-        return new ModelAndView("delete_movie");
+    	redirectAttributes.addFlashAttribute("message", "Película eliminada correctamene!");
+    	redirectAttributes.addFlashAttribute("type_message", "delete");
+    	return "redirect:/home";
     }
     
     @Secured({ "ROLE_USER", "ROLE_ADMIN" })

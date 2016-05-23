@@ -70,9 +70,19 @@
         <h1>Gestionar Usuarios...</h1>
       </div>
       
-		<div th:if="${message}" class="alert alert-success alert-dismissible" role="alert">
+   		<div th:if="${type_message == 'create'}" class="alert alert-success alert-dismissible" role="alert">
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <strong>Éxito!</strong> <span th:text="${message}">Usuario creado correctamente!!!</span>
+		  <strong>Éxito!</strong> <span th:text="${message}">mensaje!!!</span>
+		</div>
+		
+   		<div th:if="${type_message == 'update'}" class="alert alert-info alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>Éxito!</strong> <span th:text="${message}">mensaje!!!</span>
+		</div>
+		
+		<div th:if="${type_message == 'delete'}" class="alert alert-danger alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>Éxito!</strong> <span th:text="${message}">mensaje!!!</span>
 		</div>
       
       <p><a class="btn btn-primary" th:href="@{/new_user}">Crear usuario</a></p>
