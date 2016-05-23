@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-  	<title>Filmaholic</title>
-    <meta charset="utf-8"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-	<link href="css/cover.css" rel="stylesheet"/>
-    <link rel="icon" href="images/movie.ico"/>
+    <head>
+    	<title>Filmaholic</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <link href="css/cover.css" rel="stylesheet"/>
+        <link rel="icon" href="images/movie.ico"/>
+    </head>
 
-  </head>
+    <body>
 
-  <body>
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="cover-container">
 
-    <div class="site-wrapper">
+                    <div class="masthead clearfix">
+                        <div class="inner">
+                            <h3 class="masthead-brand">Filmaholic</h3>
+                        </div>
+                    </div>
 
-      <div class="site-wrapper-inner">
+                    <div class="inner cover">
+                        <h1 class="cover-heading">Filmaholic</h1>
+                        <p class="lead">Te gusta ver películas más que dormir o salir a la calle?</p>
+                        <p class="lead">Filmaholic es para ti!</p>
+                        <p class="lead">
+                            <a th:href="@{/home}" class="btn btn-lg btn-default">Entrar</a>
+                        </p>
+                    </div>
 
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">Filmaholic</h3>
+                </div>
             </div>
-          </div>
-
-          <div class="inner cover">
-            <h1 class="cover-heading">Filmaholic</h1>
-            <p class="lead">Te gusta ver películas más que dormir o salir a la calle?</p>
-            <p class="lead">Filmaholic es para ti!</p>
-            <p class="lead">
-              <a th:href="@{/home}" class="btn btn-lg btn-default">Entrar</a>
-            </p>
-          </div>
-
         </div>
 
-      </div>
-
-    </div>
-
-  </body>
+    </body>
 </html>

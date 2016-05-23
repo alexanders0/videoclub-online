@@ -21,18 +21,28 @@ public class DatabaseLoader {
     @PostConstruct
     private void initDatabase() {
         // User #1: "user", with password "p1" and role "USER"
-        GrantedAuthority[] userRoles = {
-                new SimpleGrantedAuthority("ROLE_USER") };
-        
-        userRepository.save(new User("user", "p1", "user@upm.es", Arrays.asList(userRoles)));
+//        GrantedAuthority[] userRoles = {
+//                new SimpleGrantedAuthority("ROLE_USER") };
+//        
+//        userRepository.save(new User("user", "p1", "user@upm.es", Arrays.asList(userRoles)));
 
         // User #2: "root", with password "p2" and roles "USER" and "ADMIN"
-        GrantedAuthority[] adminRoles = {
-                new SimpleGrantedAuthority("ROLE_USER"),
-                new SimpleGrantedAuthority("ROLE_ADMIN") };
         
-        userRepository.save(new User("root", "p2", "root@upm.es", Arrays.asList(adminRoles)));
+        // Verify if user has been created
+        User user = userRepository.findByUser("root");
+        if (user == null) {
+        	GrantedAuthority[] adminRoles = {
+                    new SimpleGrantedAuthority("ROLE_USER"),
+                    new SimpleGrantedAuthority("ROLE_ADMIN")
+                    };
+            
+            userRepository.save(new User("root", "p2", "root@upm.es", Arrays.asList(adminRoles)));
+		}
         
+        // Providing examples of films while database is empty
+        Movie movie1 = movieRepository.findByName("Interestelar");
+        if (movie1 == null) {
+        	
         // Example movie 1
         movieRepository.save( new Movie( 
         		"Interestelar",
@@ -48,10 +58,14 @@ public class DatabaseLoader {
         		"http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_UX182_CR0,0,182,268_AL_.jpg",
         		5
         		));
+        }
+        
+        Movie movie2 = movieRepository.findByName("The Revenant");
+        if (movie2 == null) {
         
         // Example movie 2
         movieRepository.save( new Movie( 
-        		"The revenant",
+        		"The Revenant",
         		"https://www.youtube.com/embed/QRfj1VCg16Y",
         		"Año 1823. En las profundidades de la América salvaje, el explorador Hugh Glass (Leonardo DiCaprio) "
         		+ "participa junto a su hijo mestizo Hawk en una expedición de tramperos que recolecta pieles. Glass "
@@ -65,6 +79,7 @@ public class DatabaseLoader {
         		"http://ia.media-imdb.com/images/M/MV5BMjU4NDExNDM1NF5BMl5BanBnXkFtZTgwMDIyMTgxNzE@._V1_UX182_CR0,0,182,268_AL_.jpg",
         		4
         		));
+        }
     }
 
 }
