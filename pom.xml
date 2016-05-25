@@ -53,12 +53,17 @@
          <groupId>org.thymeleaf.extras</groupId>
          <artifactId>thymeleaf-extras-springsecurity4</artifactId>
      </dependency>
-     
+
 	<dependency>
-	   <groupId>com.squareup.retrofit</groupId>
-	   <artifactId>retrofit</artifactId>
-	   <version>1.7.1</version>
+ 		<groupId>com.squareup.retrofit</groupId>
+ 		<artifactId>retrofit</artifactId>
+ 		<version>1.7.1</version>
 	</dependency>
-   
+	
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+   	
   </dependencies>
 </project>

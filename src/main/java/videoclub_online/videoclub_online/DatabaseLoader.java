@@ -52,11 +52,14 @@ public class DatabaseLoader {
         		+ "La historia gira en torno a un grupo de intrépidos exploradores que se adentran por uno de esos "
         		+ "agujeros y viajan a través del mismo, encontrándose en otra dimensión. Un mundo desconocido se abre "
         		+ "ante ellos y deberán luchar por mantenerse unidos si quieren volver de una pieza.",
-        		2014, 
+        		"2014", 
         		"Christopher Nolan",
         		"Matthew McConaughey, Anne Hathaway, Jessica Chastain", 
         		"http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        		5
+        		"8,6/10",
+        		"2h 49min",
+        		"",
+        		"adventure, drama, sci-fi"
         		));
         }
         
@@ -73,11 +76,14 @@ public class DatabaseLoader {
         		+ "miembro de su equipo, John Fitzgerald (Tom Hardy). Con la fuerza de voluntad como su única arma, "
         		+ "Glass deberá enfrentarse a un territorio hostil, a un invierno brutal y a la guerra constante entre "
         		+ "las tribus de nativos americanos, en una búsqueda implacable para conseguir vengarse.",
-        		2015, 
+        		"2015", 
         		"Alejandro G. Iñárritu",
         		"Leonardo DiCaprio, Tom Hardy, Will Poulter", 
         		"http://ia.media-imdb.com/images/M/MV5BMjU4NDExNDM1NF5BMl5BanBnXkFtZTgwMDIyMTgxNzE@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        		4
+        		"8,1/10",
+        		"2h 36min",
+        		"",
+        		"adventure, drama, thriller, western"
         		));
         }
     }

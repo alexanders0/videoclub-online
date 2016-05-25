@@ -1,6 +1,7 @@
 package videoclub_online.videoclub_online;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -12,6 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import retrofit.RestAdapter;
+import videoclub_online.rest.MovieRest;
+import videoclub_online.rest.MovieRestService;
+import videoclub_online.rest_search_movie.SearchMovieRest;
+import videoclub_online.rest_search_movie.SearchMovieRestService;
+
+import videoclub_online.rest_search_movie.*;
 
 @Controller
 public class VideoClubController {
@@ -160,15 +169,56 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam(required = false) int year,
+    		@RequestParam(required = false) String year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam(required = false) int rating,
+    		@RequestParam(required = false) String rating,
     		RedirectAttributes redirectAttributes
     		) {
     	
-    	movieRepository.save(new Movie(movie_name, url_movie));
+    	// Search Movie Rest Service
+    	RestAdapter search_restadapter = new RestAdapter.Builder().setEndpoint("http://imdb.wemakesites.net/api/").build();
+    	SearchMovieRestService search_service = search_restadapter.create(SearchMovieRestService.class);
+    	SearchMovieRest search_movie = search_service.getgetSearchMovieRest("search?q=Star%20Wars");
+    	
+//    	System.out.println("URL de pelicula: "+search_movie.getData().getResults().getTitles().get(1).getTitle());
+    	List<Title> pelis;
+    	pelis = search_movie.getData().getResults().getTitles();
+    	for (Title title : pelis) {
+    		System.out.println("Titulos: "+title.getUrl());
+		}
+  
+    	
+    	// Rest Service
+    	RestAdapter restadapter = new RestAdapter.Builder().setEndpoint("http://imdb.wemakesites.net/api/").build();
+    	MovieRestService service = restadapter.create(MovieRestService.class);
+    	MovieRest rest_movie = service.getMovieRest("tt1663202");
+    	
+    	Movie movie = new Movie();
+    	movie.setName(movie_name);
+    	movie.setUrlMovie(url_movie);
+    	
+    	// Rest Data
+    	movie.setDescription(rest_movie.getData().getDescription());
+    	if (rest_movie.getData().getYear() != null) {
+    		movie.setYear(rest_movie.getData().getYear());
+		}
+    	if (!rest_movie.getData().getDirectors().isEmpty()) {
+    		movie.setDirector(rest_movie.getData().getDirectors());
+		}
+    	movie.setActors(rest_movie.getData().getCast());
+    	movie.setUrlCoverFilm(rest_movie.getData().getImage());
+    	movie.setRating(rest_movie.getData().getReview().getRating());
+    	movie.setDuration(rest_movie.getData().getDuration());
+    	movie.setWriter(rest_movie.getData().getWriters());
+    	movie.setGenre(rest_movie.getData().getGenres());
+    	
+    	//Movie Saved
+    	movieRepository.save(movie);
+    	
+    	
+//    	movieRepository.save(new Movie(movie_name, url_movie));
     	
     	redirectAttributes.addFlashAttribute("message", "Película ingresada correctamene!");
     	redirectAttributes.addFlashAttribute("type_message", "create");
@@ -189,11 +239,11 @@ public class VideoClubController {
     		@RequestParam String movie_name, 
     		@RequestParam String url_movie,
     		@RequestParam String description,
-    		@RequestParam(required = false) int year,
+    		@RequestParam(required = false) String year,
     		@RequestParam String director,
     		@RequestParam String actors,
     		@RequestParam String url_cover_film,
-    		@RequestParam(required = false) int rating,
+    		@RequestParam(required = false) String rating,
     		RedirectAttributes redirectAttributes
     		) {
     	

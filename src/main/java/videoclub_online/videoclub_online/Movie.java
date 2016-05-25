@@ -18,11 +18,15 @@ public class Movie {
 	
 	@Column(length = 1000)
 	private String description;
-	private int year;
+	private String year;
 	private String director;
 	private String actors;
 	private String urlCoverFilm;
-	private int rating;
+	private String rating;
+	
+	private String duration;
+	private String writer;
+	private String genre;
 	
 	public Movie(){
 	}
@@ -32,8 +36,8 @@ public class Movie {
 		this.urlMovie = urlPelicula;
 	}
 	
-	public Movie(String nombre, String urlPelicula, String descripcion, int anio, String director, String actores,
-			String urlPortada, int valoracion) {
+	public Movie(String nombre, String urlPelicula, String descripcion, String anio, String director, String actores,
+			String urlPortada, String valoracion, String duration, String writer, String genre) {
 		this.name = nombre;
 		this.urlMovie = urlPelicula;
 		this.description = descripcion;
@@ -42,6 +46,9 @@ public class Movie {
 		this.actors = actores;
 		this.urlCoverFilm = urlPortada;
 		this.rating = valoracion;
+		this.duration = duration;
+		this.writer = writer;
+		this.genre = genre;
 	}
 
 	//	Getters and Setters
@@ -77,11 +84,11 @@ public class Movie {
 		this.description = description;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 
@@ -109,12 +116,36 @@ public class Movie {
 		this.urlCoverFilm = urlCoverFilm;
 	}
 
-	public int getRating() {
+	public String getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 	
 }

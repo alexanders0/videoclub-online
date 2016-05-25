@@ -104,15 +104,13 @@
 						
 						<div class="tab-pane fade" id="ficha_tecnica">
 							<dl class="dl-horizontal"><br/>
-								<dt>Título original:</dt><dd>movie name</dd>
+								<dt>Título original:</dt><dd th:text="${movie.getName()}">movie name</dd>
 								<dt>Año:</dt><dd th:text="${movie.getYear()}">year</dd>
-								<dt>Duración:</dt><dd>movie length</dd>
-								<dt>País:</dt><dd>country</dd>
+								<dt>Duración:</dt><dd th:text="${movie.getDuration()}">movie length</dd>
 								<dt>Director:</dt><dd th:text="${movie.getDirector()}">director</dd>
-								<dt>Escritor:</dt><dd>writer</dd>
+								<dt>Escritor:</dt><dd th:text="${movie.getWriter()}">writer</dd>
 								<dt>Reparto:</dt><dd th:text="${movie.getActors()}">actors</dd>
-								<dt>Productora:</dt><dd>producer</dd>
-								<dt>Género:</dt><dd>Kind</dd>
+								<dt>Género:</dt><dd th:text="${movie.getGenre()}">genre</dd>
 							</dl>
 						</div>
 					</div>
