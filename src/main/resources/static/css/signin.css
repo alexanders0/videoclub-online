@@ -2,9 +2,8 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background: url('../images/cloverfield_lane.jpg') no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
-
 .form-signin{
   max-width: 330px;
   padding: 15px;
@@ -38,10 +37,4 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.messages {
-	max-width: 330px;
-	padding: 15px;
-  	margin: 0 auto;
 }

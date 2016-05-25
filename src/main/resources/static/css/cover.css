@@ -28,7 +28,7 @@ html,
 body {
   height: 100%;
   background: url('../images/scarlett.jpg') no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
 body {
   color: #fff;

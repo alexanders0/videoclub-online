@@ -8,6 +8,7 @@ public class SearchMovieRest {
 	private String term;
 	private String search_url;
 	private Data data;
+	
 	public String getStatus() {
 		return status;
 	}

@@ -20,6 +20,7 @@ public class Movie {
 	private String description;
 	private String year;
 	private String director;
+	@Column(length = 1000)
 	private String actors;
 	private String urlCoverFilm;
 	private String rating;
