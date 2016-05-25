@@ -28,6 +28,9 @@ public class MovieService {
 			String year,
 			String director,
 			String actors,
+			String writer,
+    		String duration,
+    		String genre,
 			String url_cover_film,
 			String rating){
 		
@@ -44,7 +47,6 @@ public class MovieService {
     	// creas tu objeto de la clase JaroWinkler y llamas a su metodo similarity
     	JaroWinkler comparison = new JaroWinkler();
     	double val_simil;
-    	val_simil = comparison.similarity("hola", "hola1");
     	
     	for (Title title : movies_rest) {
     		if (title.getTitle().equals(movie_name)) {
@@ -63,24 +65,74 @@ public class MovieService {
     	MovieRestRepository service = restadapter.create(MovieRestRepository.class);
     	MovieRest rest_movie = service.getMovieRest(id);
     	
-    	Movie movie = new Movie();
+    	movie = new Movie();
     	movie.setName(movie_name);
     	movie.setUrlMovie(url_movie);
     	
-    	// Rest Data
-    	movie.setDescription(rest_movie.getData().getDescription());
-    	if (rest_movie.getData().getYear() != null) {
+    	// Assignment of data
+    	
+    	// description
+    	if (description.equals("") && rest_movie.getData().getDescription() != null) {
+    		movie.setDescription(rest_movie.getData().getDescription());
+		} else {
+			movie.setDescription(description);
+		}
+    	
+    	// year
+    	if (year.equals("") && rest_movie.getData().getYear() != null) {
     		movie.setYear(rest_movie.getData().getYear());
+		} else {
+			movie.setYear(year);
 		}
-    	if (!rest_movie.getData().getDirectors().isEmpty()) {
+    	
+    	// director
+    	if (director.equals("") && !rest_movie.getData().getDirectors().isEmpty()) {
     		movie.setDirector(rest_movie.getData().getDirectors());
+		} else {
+			movie.setDirector(director);
 		}
-    	movie.setActors(rest_movie.getData().getCast());
-    	movie.setUrlCoverFilm(rest_movie.getData().getImage());
-    	movie.setRating(rest_movie.getData().getReview().getRating());
-    	movie.setDuration(rest_movie.getData().getDuration());
-    	movie.setWriter(rest_movie.getData().getWriters());
-    	movie.setGenre(rest_movie.getData().getGenres());
+    	
+    	// actors
+    	if (actors.equals("") && !rest_movie.getData().getCast().isEmpty()) {
+    		movie.setActors(rest_movie.getData().getCast());
+		} else {
+			movie.setActors(actors);
+		}
+    	
+    	// writers
+    	if (writer.equals("") && !rest_movie.getData().getWriters().isEmpty()) {
+    		movie.setWriter(rest_movie.getData().getWriters());
+		} else {
+			movie.setWriter(writer);
+		}
+    	
+    	// duration
+    	if (duration.equals("") && rest_movie.getData().getDuration() != null) {
+    		movie.setDuration(rest_movie.getData().getDuration());
+		} else {
+			movie.setDuration(duration);
+		}
+
+    	// genres
+    	if (genre.equals("") && !rest_movie.getData().getGenres().isEmpty()) {
+    		movie.setGenre(rest_movie.getData().getGenres());
+		} else {
+			movie.setGenre(genre);
+		}
+    	
+    	// url_cover_film
+    	if (url_cover_film.equals("") && rest_movie.getData().getImage() != null) {
+    		movie.setUrlCoverFilm(rest_movie.getData().getImage());
+		} else {
+			movie.setUrlCoverFilm(url_cover_film);
+		}
+    	
+    	// rating
+    	if (rating.equals("") && rest_movie.getData().getReview().getRating() != null) {
+    		movie.setRating(rest_movie.getData().getReview().getRating());
+		} else {
+			movie.setRating(rating+"/10");
+		}
     	
     	//Movie Saved
     	movieRepository.save(movie);	

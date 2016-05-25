@@ -32,7 +32,6 @@ public class DatabaseLoader {
         User user = userRepository.findByUser("root");
         if (user == null) {
         	GrantedAuthority[] adminRoles = {
-                    new SimpleGrantedAuthority("ROLE_USER"),
                     new SimpleGrantedAuthority("ROLE_ADMIN")
                     };
             

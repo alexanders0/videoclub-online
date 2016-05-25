@@ -83,6 +83,7 @@
 		<br />
 		<p th:text="${user.getPasswordHash()}">password</p>
 		<p th:text="${user.getEmail()}">email</p>
+		<p th:text="${user.getRoles()}">role</p>
 
 		<a th:href="@{/edit_user(id=${user.getId()})}"
 			th:each="user : ${users}">

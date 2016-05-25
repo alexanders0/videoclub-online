@@ -96,7 +96,8 @@
                                 <a href="@{/watch_movie}" th:href="@{/watch_movie(id=${movie.getId()})}" th:text="|${movie.getName()}|">Película</a>
                             </h4>
                             <div th:if="${movie.getDescription()}">
-                            	<p th:if="${movie.getDescription() != ''}" th:text="|${#strings.substring(movie.getDescription(),0,199)}...|">sinopsis</p>
+                            	<p th:if="${movie.getDescription().length() >= 199}" th:text="|${#strings.substring(movie.getDescription(),0,199)}...|">sinopsis</p>
+                            	<p th:if="!${movie.getDescription().length() >= 199}" th:text="${movie.getDescription()}">sinopsis</p>
                             </div> 
                             <a th:href="@{/watch_movie(id=${movie.getId()})}" class="btn btn-primary" role="button">Ver Info</a>  
                             <div sec:authorize="hasRole('ROLE_ADMIN')">

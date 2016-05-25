@@ -91,7 +91,6 @@
                     <thead>
                         <tr>
                             <th>Usuario</th>
-                            <th>Contraseña</th>
                             <th>Correo</th>
                             <th>Rol</th>
                             <th>Acción</th>
@@ -99,11 +98,17 @@
                     </thead>
                     <tbody>
                         <tr th:each="user : ${users}">
-                            <td th:text="|${user.getUser()}|">username</td>
-                            <td th:text="|${user.getPasswordHash()}|">password</td>
+                        	
+                            <td th:text="|${user.getUser()}|"></td>
                             <td th:text="|${user.getEmail()}|">mail@mail.com</td>
                             <td th:text="|${user.getRoles()}|">role</td>
                             <td>
+                                <a th:href="@{/user(id=${user.getId()})}">
+                                    <button type="button" class="btn btn-info" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+                            
                                 <a th:href="@{/edit_user(id=${user.getId()})}">
                                     <button type="button" class="btn btn-primary" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>

@@ -16,7 +16,7 @@ public class Movie {
 	private String name;
 	private String urlMovie;
 	
-	@Column(length = 1000)
+	@Column(length = 2000)
 	private String description;
 	private String year;
 	private String director;
