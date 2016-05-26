@@ -38,29 +38,12 @@ public class MovieService {
     	RestAdapter search_restadapter = new RestAdapter.Builder().setEndpoint("http://imdb.wemakesites.net/api").build();
     	SearchMovieRestRepository search_service = search_restadapter.create(SearchMovieRestRepository.class);
     	SearchMovieRest search_movie = search_service.getSearchMovieRest(movie_name.replace(" ", "%20"));
-    	System.out.println("URL search" +search_movie.getSearch_url());
     	
-    	String id = null;
-    	List<Title> movies_rest;
-    	movies_rest = search_movie.getData().getResults().getTitles();
     	
-    	// creas tu objeto de la clase JaroWinkler y llamas a su metodo similarity
-    	JaroWinkler comparison = new JaroWinkler();
-    	double val_simil;
-    	
-    	for (Title title : movies_rest) {
-    		if (title.getTitle().equals(movie_name)) {
-				id = title.getId();
-				break;
-			}
-    		val_simil = comparison.similarity(title.getTitle(), movie_name);
-    		System.out.println("Similitud: "+ val_simil);
-    		System.out.print(" Titulos: "+title.getTitle()+" - "+title.getId());
-		}
-    	
-    	System.out.println("ID_URL: "+id);
+    	List<Title> movies_rest = search_movie.getData().getResults().getTitles(); //list of movies
+    	String id = getRestId(movie_name, movies_rest); //IMDB movie id with greater similarity
   
-    	// Rest Service
+    	// Movie Rest Service
     	RestAdapter restadapter = new RestAdapter.Builder().setEndpoint("http://imdb.wemakesites.net/api/").build();
     	MovieRestRepository service = restadapter.create(MovieRestRepository.class);
     	MovieRest rest_movie = service.getMovieRest(id);
@@ -128,7 +111,7 @@ public class MovieService {
 		}
     	
     	// rating
-    	if (rating.equals("") && rest_movie.getData().getReview().getRating() != null) {
+    	if (rating == null && rest_movie.getData().getReview().getRating() != null) {
     		movie.setRating(rest_movie.getData().getReview().getRating());
 		} else {
 			movie.setRating(rating+"/10");
@@ -179,6 +162,26 @@ public class MovieService {
 	
 	public Iterable<Movie> getMovieListBySearch(String search_value){
 		return movieRepository.findByNameContaining(search_value);
+	}
+	
+	public String getRestId(String movie_name, List<Title> movies_rest){
+    	JaroWinkler comparison = new JaroWinkler();
+    	double val_simil;
+    	double greater_simil = 0;
+    	String id = null;
+    	
+    	for (Title title : movies_rest) {
+    		val_simil = comparison.similarity(movie_name, title.getTitle());
+    		System.out.print("Similitud: "+ val_simil);
+    		System.out.println(" Titulos: "+title.getTitle()+" - "+title.getId());
+    		if (val_simil > greater_simil) {
+				greater_simil = val_simil;
+				id = title.getId();
+			}
+		}
+    	
+    	System.out.println("ID_IMDB: "+id);
+		return id;
 	}
 	
 }
