@@ -89,12 +89,15 @@ public class MovieController {
     		@RequestParam(required = false) String year,
     		@RequestParam String director,
     		@RequestParam String actors,
+    		@RequestParam String writer,
+    		@RequestParam String duration,
+    		@RequestParam String genre,
     		@RequestParam String url_cover_film,
     		@RequestParam(required = false) String rating,
     		RedirectAttributes redirectAttributes
     		) {
     	
-    	movieService.updateMovie(id, movie_name, url_movie, description, year, director, actors, url_cover_film, rating);
+    	movieService.updateMovie(id, movie_name, url_movie, description, year, director, actors, writer, duration, genre, url_cover_film, rating);
     	
     	redirectAttributes.addFlashAttribute("message", "Película actualizada correctamene!");
     	redirectAttributes.addFlashAttribute("type_message", "update");

@@ -41,83 +41,90 @@ public class MovieService {
     	
     	
     	List<Title> movies_rest = search_movie.getData().getResults().getTitles(); //list of movies
-    	String id = getRestId(movie_name, movies_rest); //IMDB movie id with greater similarity
-  
-    	// Movie Rest Service
-    	RestAdapter restadapter = new RestAdapter.Builder().setEndpoint("http://imdb.wemakesites.net/api/").build();
-    	MovieRestRepository service = restadapter.create(MovieRestRepository.class);
-    	MovieRest rest_movie = service.getMovieRest(id);
     	
     	movie = new Movie();
     	movie.setName(movie_name);
     	movie.setUrlMovie(url_movie);
     	
-    	// Assignment of data
+    	// If list of movies is not empty, we search an IMDB movie ID
     	
-    	// description
-    	if (description.equals("") && rest_movie.getData().getDescription() != null) {
-    		movie.setDescription(rest_movie.getData().getDescription());
-		} else {
-			movie.setDescription(description);
-		}
-    	
-    	// year
-    	if (year.equals("") && rest_movie.getData().getYear() != null) {
-    		movie.setYear(rest_movie.getData().getYear());
-		} else {
-			movie.setYear(year);
-		}
-    	
-    	// director
-    	if (director.equals("") && !rest_movie.getData().getDirectors().isEmpty()) {
-    		movie.setDirector(rest_movie.getData().getDirectors());
-		} else {
-			movie.setDirector(director);
-		}
-    	
-    	// actors
-    	if (actors.equals("") && !rest_movie.getData().getCast().isEmpty()) {
-    		movie.setActors(rest_movie.getData().getCast());
-		} else {
-			movie.setActors(actors);
-		}
-    	
-    	// writers
-    	if (writer.equals("") && !rest_movie.getData().getWriters().isEmpty()) {
-    		movie.setWriter(rest_movie.getData().getWriters());
-		} else {
-			movie.setWriter(writer);
-		}
-    	
-    	// duration
-    	if (duration.equals("") && rest_movie.getData().getDuration() != null) {
-    		movie.setDuration(rest_movie.getData().getDuration());
-		} else {
-			movie.setDuration(duration);
-		}
+		String id = getRestId(movie_name, movies_rest); //IMDB movie id with greater similarity
+		
+		if (id != null) {
+			
+        	// Movie Rest Service
+        	RestAdapter restadapter = new RestAdapter.Builder().setEndpoint("http://imdb.wemakesites.net/api/").build();
+        	MovieRestRepository service = restadapter.create(MovieRestRepository.class);
+        	MovieRest rest_movie = service.getMovieRest(id);
+        	
+        	// Assignment of data
+        	
+        	// description
+        	if (description.equals("") && rest_movie.getData().getDescription() != null) {
+        		movie.setDescription(rest_movie.getData().getDescription());
+    		} else {
+    			movie.setDescription(description);
+    		}
+        	
+        	// year
+        	if (year.equals("") && rest_movie.getData().getYear() != null) {
+        		movie.setYear(rest_movie.getData().getYear());
+    		} else {
+    			movie.setYear(year);
+    		}
+        	
+        	// director
+        	if (director.equals("") && !rest_movie.getData().getDirectors().isEmpty()) {
+        		movie.setDirector(rest_movie.getData().getDirectors());
+    		} else {
+    			movie.setDirector(director);
+    		}
+        	
+        	// actors
+        	if (actors.equals("") && !rest_movie.getData().getCast().isEmpty()) {
+        		movie.setActors(rest_movie.getData().getCast());
+    		} else {
+    			movie.setActors(actors);
+    		}
+        	
+        	// writers
+        	if (writer.equals("") && !rest_movie.getData().getWriters().isEmpty()) {
+        		movie.setWriter(rest_movie.getData().getWriters());
+    		} else {
+    			movie.setWriter(writer);
+    		}
+        	
+        	// duration
+        	if (duration.equals("") && rest_movie.getData().getDuration() != null) {
+        		movie.setDuration(rest_movie.getData().getDuration());
+    		} else {
+    			movie.setDuration(duration);
+    		}
 
-    	// genres
-    	if (genre.equals("") && !rest_movie.getData().getGenres().isEmpty()) {
-    		movie.setGenre(rest_movie.getData().getGenres());
-		} else {
-			movie.setGenre(genre);
+        	// genres
+        	if (genre.equals("") && !rest_movie.getData().getGenres().isEmpty()) {
+        		movie.setGenre(rest_movie.getData().getGenres());
+    		} else {
+    			movie.setGenre(genre);
+    		}
+        	
+        	// url_cover_film
+        	if (url_cover_film.equals("") && rest_movie.getData().getImage() != null) {
+        		movie.setUrlCoverFilm(rest_movie.getData().getImage());
+    		} else {
+    			movie.setUrlCoverFilm(url_cover_film);
+    		}
+        	
+        	// rating
+        	if (rating.equals("") && rest_movie.getData().getReview().getRating() != null) {
+        		movie.setRating(rest_movie.getData().getReview().getRating());
+    		} else {
+    			movie.setRating(rating+"/10");
+    		}
+        	
+        	//Movie Saved
 		}
     	
-    	// url_cover_film
-    	if (url_cover_film.equals("") && rest_movie.getData().getImage() != null) {
-    		movie.setUrlCoverFilm(rest_movie.getData().getImage());
-		} else {
-			movie.setUrlCoverFilm(url_cover_film);
-		}
-    	
-    	// rating
-    	if (rating == null && rest_movie.getData().getReview().getRating() != null) {
-    		movie.setRating(rest_movie.getData().getReview().getRating());
-		} else {
-			movie.setRating(rating+"/10");
-		}
-    	
-    	//Movie Saved
     	movieRepository.save(movie);	
 	}
 	
@@ -129,6 +136,9 @@ public class MovieService {
 			String year,
 			String director,
 			String actors,
+			String writer,
+			String duration,
+			String genre,
 			String url_cover_film,
 			String rating){
 		
@@ -140,6 +150,9 @@ public class MovieService {
     	movie.setYear(year);
     	movie.setDirector(director);
     	movie.setActors(actors);
+    	movie.setWriter(writer);
+    	movie.setDuration(duration);
+    	movie.setGenre(genre);
     	movie.setUrlCoverFilm(url_cover_film);
     	movie.setRating(rating);
     	
@@ -165,6 +178,7 @@ public class MovieService {
 	}
 	
 	public String getRestId(String movie_name, List<Title> movies_rest){
+		// Comparison between movie_name and rest list of movies with JaroWinkler library
     	JaroWinkler comparison = new JaroWinkler();
     	double val_simil;
     	double greater_simil = 0;

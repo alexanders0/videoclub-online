@@ -22,6 +22,7 @@ public class Movie {
 	private String director;
 	@Column(length = 1000)
 	private String actors;
+	@Column(length = 500)
 	private String urlCoverFilm;
 	private String rating;
 	
@@ -82,6 +83,9 @@ public class Movie {
 	}
 
 	public void setDescription(String description) {
+		if (description.length() > 2000) {
+			description = description.substring(0, 1999);
+		}
 		this.description = description;
 	}
 
@@ -98,6 +102,9 @@ public class Movie {
 	}
 
 	public void setDirector(String director) {
+		if (director.length() > 255) {
+			director = director.substring(0, 254);
+		}
 		this.director = director;
 	}
 
@@ -106,6 +113,9 @@ public class Movie {
 	}
 
 	public void setActors(String actors) {
+		if (actors.length() > 1000) {
+			actors = actors.substring(0, 999);
+		}
 		this.actors = actors;
 	}
 
@@ -114,6 +124,9 @@ public class Movie {
 	}
 
 	public void setUrlCoverFilm(String urlCoverFilm) {
+		if (urlCoverFilm.length() > 500) {
+			urlCoverFilm = urlCoverFilm.substring(0, 499);
+		}
 		this.urlCoverFilm = urlCoverFilm;
 	}
 
@@ -138,6 +151,9 @@ public class Movie {
 	}
 
 	public void setWriter(String writer) {
+		if (writer.length() > 255) {
+			writer = writer.substring(0, 254);
+		}
 		this.writer = writer;
 	}
 
@@ -146,6 +162,9 @@ public class Movie {
 	}
 
 	public void setGenre(String genre) {
+		if (genre.length() > 255) {
+			genre = genre.substring(0, 254);
+		}
 		this.genre = genre;
 	}
 	
