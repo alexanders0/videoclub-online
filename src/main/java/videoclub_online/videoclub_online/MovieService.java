@@ -116,11 +116,13 @@ public class MovieService {
     		}
         	
         	// rating
-        	if (rating.equals("") && rest_movie.getData().getReview().getRating() != null) {
-        		movie.setRating(rest_movie.getData().getReview().getRating());
-    		} else {
-    			movie.setRating(rating+"/10");
-    		}
+        	if (rest_movie.getData().getReview() != null) {
+        		if (rating.equals("") && rest_movie.getData().getReview().getRating() != null) {
+            		movie.setRating(rest_movie.getData().getReview().getRating());
+        		} else {
+        			movie.setRating(rating+"/10");
+        		}
+			}
         	
         	//Movie Saved
 		}

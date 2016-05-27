@@ -19,7 +19,6 @@ public class UserService {
             new SimpleGrantedAuthority("ROLE_USER") };
 	
 	GrantedAuthority[] adminRoles = {
-			new SimpleGrantedAuthority("ROLE_USER"),
 			new SimpleGrantedAuthority("ROLE_ADMIN") };
 	
 	public User getUser(Long id){
@@ -39,18 +38,17 @@ public class UserService {
 	}
 	
 	public void updateUser(Long id, String username, String password, String email, String role){
-//    	fields updated
+		// fields updated
     	user = userRepository.findOne(id);
     	user.setUser(username);
     	user.setPasswordHash(password);
     	user.setEmail(email);
-    	
 //    	if (role.equals("1")) {
 //    		user.setRoles(Arrays.asList(userRoles));
 //		} else {
 //			user.setRoles(Arrays.asList(adminRoles));
 //		}
-//    	
+    	
     	userRepository.save(user); //object saved
 	}
 	
