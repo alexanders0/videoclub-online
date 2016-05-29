@@ -37,17 +37,12 @@ public class UserService {
 		}
 	}
 	
-	public void updateUser(Long id, String username, String password, String email, String role){
+	public void updateUser(Long id, String username, String password, String email){
 		// fields updated
     	user = userRepository.findOne(id);
     	user.setUser(username);
     	user.setPasswordHash(password);
     	user.setEmail(email);
-//    	if (role.equals("1")) {
-//    		user.setRoles(Arrays.asList(userRoles));
-//		} else {
-//			user.setRoles(Arrays.asList(adminRoles));
-//		}
     	
     	userRepository.save(user); //object saved
 	}

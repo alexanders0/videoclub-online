@@ -60,11 +60,10 @@ public class UserController {
     		@RequestParam String username, 
     		@RequestParam String password,
     		@RequestParam String email,
-    		@RequestParam String role,
     		RedirectAttributes redirectAttributes
     		) {
     	
-    	userService.updateUser(id, username, password, email, role);
+    	userService.updateUser(id, username, password, email);
     	
     	redirectAttributes.addFlashAttribute("message", "Usuario actualizado correctamene!");
     	redirectAttributes.addFlashAttribute("type_message", "update");

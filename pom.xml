@@ -72,4 +72,22 @@
 	</dependency>
 	
   </dependencies>
+  
+	<build>
+	  <plugins>
+	    <plugin>
+	      <!-- Build an executable JAR -->
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-maven-plugin</artifactId>
+	      <configuration>
+	        <archive>
+	          <manifest>
+	            <addClasspath>true</addClasspath>
+	            <mainClass>videoclub_online.videoclub_online.VideoClubOnline</mainClass>
+	          </manifest>
+	        </archive>
+	      </configuration>
+	    </plugin>
+	  </plugins>
+	</build>
 </project>
